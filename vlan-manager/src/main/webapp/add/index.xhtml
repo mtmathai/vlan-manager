@@ -19,7 +19,9 @@
     <h:outputLabel for="vlanId">VLAN Id:</h:outputLabel>
     &nbsp;
   	<h:inputText id="vlanId" value="#{addVlanBean.vlanId}" 
-  	   required="true" requiredMessage="VLAN Id is required" />
+  	   required="true" requiredMessage="VLAN Id is required">
+  	   <f:validateLongRange minimum="1" maximum="4096" />
+ </h:inputText>
   </p>
   <p>
   	<h:outputLabel for="name">Name:</h:outputLabel>
@@ -28,12 +30,12 @@
   	   required="true" requiredMessage="Name is required" />
   </p>
   <p>
-  	<h:outputLabel for="Note">Note:</h:outputLabel>
+  	<h:outputLabel for="note">Note:</h:outputLabel>
   	&nbsp;
   	<h:inputTextarea id="note" value="#{addVlanBean.note}" />
   </p>
   <p>
-  	<h:commandButton value="Add" action="#{addVlanBean.save}" />
+  	<h:commandButton value="Save" action="#{addVlanBean.save}" />
   </p>
 </h:form> 
 </h:body>
