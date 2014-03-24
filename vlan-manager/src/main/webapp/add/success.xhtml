@@ -7,37 +7,35 @@
   xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 <h:head>
-  <title>Add VLAN</title>
+  <title>Added VLAN</title>
 </h:head>
 
 <h:body>
-  <h1>Add VLAN</h1>
+  <h1>Added VLAN</h1>
   <h:form prependId="false">
   <h:messages layout="table" />
  
   <p>
     <h:outputLabel for="vlanId">VLAN Id:</h:outputLabel>
     &nbsp;
-  	<h:inputText id="vlanId" value="#{addVlanBean.vlanId}" 
-  	   required="true" requiredMessage="VLAN Id is required">
-  	   <f:validateLongRange minimum="1" maximum="4096" />
- </h:inputText>
+  	<h:outputText id="vlanId" value="#{addVlanBean.vlanId}" />
   </p>
   <p>
   	<h:outputLabel for="name">Name:</h:outputLabel>
   	&nbsp;
-  	<h:inputText id="name" value="#{addVlanBean.name}" 
-  	   required="true" requiredMessage="Name is required" />
+  	<h:outputText id="name" value="#{addVlanBean.name}" />
   </p>
   <p>
   	<h:outputLabel for="note">Note:</h:outputLabel>
   	&nbsp;
-  	<h:inputTextarea id="note" value="#{addVlanBean.note}" />
+   	<h:outputText id="note" value="#{addVlanBean.note}" />
   </p>
   <p>
-  	<h:commandButton value="Save" action="#{addVlanBean.save}" />
+  	<h:commandButton value="Add Another VLAN" action="#{addVlanBean.returnToAdd}" />
+    &nbsp;
+  	<h:commandButton value="Go to VLAN Listing" action="#{addVlanBean.returnToList}" />
   </p>
+  
 </h:form> 
-
 </h:body>
 </html>
