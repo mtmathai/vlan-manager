@@ -2,8 +2,14 @@ package mtm.vlanmgr.facelets;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import mtm.vlanmgr.Vlan;
+import mtm.vlanmgr.service.AddVlanException;
+import mtm.vlanmgr.service.AddVlanService;
 
 @Named
 @RequestScoped
@@ -12,38 +18,32 @@ public class AddVlanBean implements Serializable {
 	
 	private static final long serialVersionUID = 1543893633861762281L;
 	
-	private Integer vlanId;
-	private String name;
-	private String note;
+	@Inject
+	protected AddVlanService addVlanService;
 	
-	public Integer getVlanId() {
-		return vlanId;
+	private Vlan vlan;
+	
+	@PostConstruct
+	public void init() {
+	  vlan = addVlanService.newVlan();
 	}
+	
+  public Vlan getVlan() {
+    return vlan;
+  }
 
-	public void setVlanId(Integer vlanId) {
-		this.vlanId = vlanId;
-	}
+  public void setVlan(Vlan vlan) {
+    this.vlan = vlan;
+  }
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-
-	public String save() {
-		System.out.println("Saved VLAN "+vlanId);
-		return "success";
+  public String save() {
+    try {
+      addVlanService.saveVlan(vlan);
+      return "success";
+    }
+    catch (AddVlanException ex) {
+      return null;
+    }
 	}
 	
 	public String returnToAdd() {
