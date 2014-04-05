@@ -12,7 +12,7 @@
 
 <h:body>
   <h1>Added VLAN</h1>
-  <h:form prependId="false">
+ 
   <h:messages layout="table" />
  
   <p>
@@ -31,11 +31,11 @@
    	<h:outputText id="note" value="#{addVlanBean.note}" />
   </p>
   <p>
-  	<h:commandButton value="Add Another VLAN" action="#{addVlanBean.returnToAdd}" />
+   	<h:outputLink value="../add/">Add Another VLAN</h:outputLink>
     &nbsp;
-  	<h:commandButton value="Go to VLAN Listing" action="#{addVlanBean.returnToList}" />
+  	<h:outputLink value="../">Go to VLAN Listing</h:outputLink>
   </p>
   
-</h:form> 
+ 
 </h:body>
 </html>
