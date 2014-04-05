@@ -46,14 +46,6 @@ public class AddVlanBean implements Serializable {
 		return "success";
 	}
 	
-	public String returnToAdd() {
-		return "index";
-	}
-	
-	public String returnToList() {
-		return "/index";
-	}
-	
 	public String cancel() {
 		return "/index";
 	}
