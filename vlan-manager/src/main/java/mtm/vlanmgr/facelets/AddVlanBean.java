@@ -50,10 +50,6 @@ public class AddVlanBean implements Serializable {
 		return "index";
 	}
 	
-	public String add() {
-		return "/add/index";
-	}
-	
 	public String returnToList() {
 		return "/index";
 	}
