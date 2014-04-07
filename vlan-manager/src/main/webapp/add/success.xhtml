@@ -18,17 +18,17 @@
   <p>
     <h:outputLabel for="vlanId">VLAN Id:</h:outputLabel>
     &nbsp;
-  	<h:outputText id="vlanId" value="#{addVlanBean.vlanId}" />
+  	<h:outputText id="vlanId" value="#{addVlanBean.vlan.vlanId}" />
   </p>
   <p>
   	<h:outputLabel for="name">Name:</h:outputLabel>
   	&nbsp;
-  	<h:outputText id="name" value="#{addVlanBean.name}" />
+  	<h:outputText id="name" value="#{addVlanBean.vlan.name}" />
   </p>
   <p>
   	<h:outputLabel for="note">Note:</h:outputLabel>
   	&nbsp;
-   	<h:outputText id="note" value="#{addVlanBean.note}" />
+   	<h:outputText id="note" value="#{addVlanBean.vlan.note}" />
   </p>
   <p>
    	<h:outputLink value="../add/">Add Another VLAN</h:outputLink>
