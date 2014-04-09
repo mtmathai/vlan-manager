@@ -4,11 +4,8 @@ import mtm.vlanmgr.Vlan;
 
 public interface AddVlanService {
 	
-	/* Creates a new transient instance of a vlan */
-	Vlan newVlan(); // Factory method which is used instead of Vlan vlan = new Vlan (). 
+	Vlan newVlan();
 	
 	/* Saves a transient Vlan, making it persistent */
 	void saveVlan (Vlan vlan) throws AddVlanException;
-	
-
 }
