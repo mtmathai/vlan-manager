@@ -2,8 +2,13 @@ package mtm.vlanmgr.facelets;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import mtm.vlanmgr.Vlan;
+import mtm.vlanmgr.service.AddVlanService;
 
 @Named
 @RequestScoped
@@ -12,37 +17,53 @@ public class AddVlanBean implements Serializable {
 	
 	private static final long serialVersionUID = 1543893633861762281L;
 	
-	private Integer vlanId;
-	private String name;
-	private String note;
+	/* The injected service and post constructed initialization have the same effect as instantiation of a concrete vlan class 
+	 * but uses good design principle that allows for the design of the vlan to be open
+	 */
 	
+	@Inject
+	protected AddVlanService addVlanService;
+	
+	private Vlan vlan;
+	
+	@PostConstruct
+	public void init() {
+		vlan = addVlanService.newVlan();
+	}
+	
+	/* Needed for the Web form */
+	public Vlan getVlan() {
+		return vlan;
+	}
+	
+	/* getters and setters for vlan properties */
 	public Integer getVlanId() {
-		return vlanId;
+		return vlan.getVlanId();
 	}
 
 	public void setVlanId(Integer vlanId) {
-		this.vlanId = vlanId;
+		vlan.SetVlanId(vlanId);
 	}
 
 	public String getName() {
-		return name;
+		return vlan.getName();
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		vlan.setName(name);
 	}
 
 	public String getNote() {
-		return note;
+		return vlan.getNote();
 	}
 
 	public void setNote(String note) {
-		this.note = note;
+		vlan.setNote(note);
 	}
 
 
 	public String save() {
-		System.out.println("Saved VLAN "+vlanId);
+		System.out.println("Saved VLAN "+vlan.getVlanId());
 		return "success";
 	}
 	
