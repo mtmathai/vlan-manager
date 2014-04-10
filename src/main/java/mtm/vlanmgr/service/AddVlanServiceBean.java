@@ -1,10 +1,12 @@
 package mtm.vlanmgr.service;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import mtm.vlanmgr.Vlan;
 import mtm.vlanmgr.VlanFactory;
 
+@ApplicationScoped
 public class AddVlanServiceBean implements AddVlanService {
 	
 	@Inject

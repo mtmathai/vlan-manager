@@ -4,7 +4,7 @@ public interface Vlan {
 	
 	Integer getVlanId();
 	
-	void SetVlanId(Integer vlanId);
+	void setVlanId(Integer vlanId);
 	
 	String getName();
 	

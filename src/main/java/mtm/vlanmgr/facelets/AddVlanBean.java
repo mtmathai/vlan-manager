@@ -36,32 +36,6 @@ public class AddVlanBean implements Serializable {
 		return vlan;
 	}
 	
-	/* getters and setters for vlan properties */
-	public Integer getVlanId() {
-		return vlan.getVlanId();
-	}
-
-	public void setVlanId(Integer vlanId) {
-		vlan.SetVlanId(vlanId);
-	}
-
-	public String getName() {
-		return vlan.getName();
-	}
-
-	public void setName(String name) {
-		vlan.setName(name);
-	}
-
-	public String getNote() {
-		return vlan.getNote();
-	}
-
-	public void setNote(String note) {
-		vlan.setNote(note);
-	}
-
-
 	public String save() {
 		System.out.println("Saved VLAN "+vlan.getVlanId());
 		return "success";
