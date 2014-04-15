@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import mtm.vlanmgr.Vlan;
+import mtm.vlanmgr.service.AddVlanException;
 import mtm.vlanmgr.service.AddVlanService;
 
 @Named
@@ -37,8 +38,14 @@ public class AddVlanBean implements Serializable {
 	}
 	
 	public String save() {
-		System.out.println("Saved VLAN "+vlan.getVlanId());
-		return "success";
+		//System.out.println("Saved VLAN "+vlan.getVlanId());
+		try {
+			addVlanService.saveVlan(vlan);
+			return "success";
+		} catch (AddVlanException e) {
+			return null;
+		}
+		
 	}
 	
 }
