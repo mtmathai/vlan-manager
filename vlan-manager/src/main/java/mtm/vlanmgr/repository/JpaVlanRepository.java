@@ -1,9 +1,12 @@
 package mtm.vlanmgr.repository;
 
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 
 import mtm.vlanmgr.Vlan;
 
@@ -25,6 +28,16 @@ public class JpaVlanRepository implements VlanRepository {
     catch (PersistenceException ex) {
       throw new RepositoryException(ex);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<Vlan> findAll() {
+    TypedQuery<Vlan> query = entityManager.createNamedQuery(
+        "findAllVlans", Vlan.class);
+    return query.getResultList();
   }
 
 }
