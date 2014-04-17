@@ -9,10 +9,32 @@
 
   <h:body>
     <h1>VLAN Manager</h1>
-    <h3>Existing VLAN list</h3>
-    A list of VLANs will be displayed here in a future release.
-      <p>
-  	  <h:outputLink value="add/">Add VLAN</h:outputLink>
+    <p>
+      These are the existing VLANs known to the application.
     </p>
+    <p>
+      <h:outputLink value="add/">Add VLAN</h:outputLink>
+    </p>
+
+    <h:dataTable var="vlan" value="#{vlanTableBean.vlans}"
+      rendered="#{not empty vlanTableBean.vlans}">
+      <h:column>
+        <f:facet name="header">ID</f:facet>
+        #{vlan.vlanId}
+      </h:column>
+      <h:column>
+        <f:facet name="header">Name</f:facet>
+        #{vlan.name}
+      </h:column>
+      <h:column>
+        <f:facet name="header">Notes</f:facet>
+        #{vlan.note}
+      </h:column>
+    </h:dataTable>
+    
+    <h:panelGroup rendered="#{empty vlanTableBean.vlans}">
+      <p>There are no VLANs to display.</p>
+    </h:panelGroup>
+     
   </h:body>
 </html>
