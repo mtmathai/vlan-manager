@@ -11,5 +11,11 @@
     		<to-view-id>/index.xhtml</to-view-id>
     		<redirect />
     	</navigation-case>
+      <navigation-case>
+        <from-outcome>success</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+        <redirect />
+      </navigation-case>
     </navigation-rule>
+
 </faces-config>
