@@ -1,20 +1,18 @@
 package mtm.vlanmgr.service;
 
-import mtm.vlanmgr.Vlan;
-
 public interface AddVlanService {
   
   /**
-   * Creates a new transient instance of {@link Vlan}.
-   * @return new vlan object
+   * Creates an editor for a new VLAN.
+   * @return editor
    */
-  Vlan newVlan();
+  VlanEditor newVlan();
 
   /**
-   * Saves a transient Vlan, making it persistent.
-   * @param vlan the vlan to save
+   * Saves the contents of the editor, making a new persistent VLAN.
+   * @param editor the editor whose contents are to be saved
    * @throws AddVlanException if a recoverable error occurs
    */
-  void saveVlan(Vlan vlan) throws AddVlanException;
+  void saveVlan(VlanEditor editor) throws AddVlanException;
   
 }

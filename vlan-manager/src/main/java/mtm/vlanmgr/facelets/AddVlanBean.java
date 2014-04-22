@@ -7,9 +7,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import mtm.vlanmgr.Vlan;
 import mtm.vlanmgr.service.AddVlanException;
 import mtm.vlanmgr.service.AddVlanService;
+import mtm.vlanmgr.service.VlanEditor;
 
 @Named
 @RequestScoped
@@ -21,20 +21,20 @@ public class AddVlanBean implements Serializable {
 	@Inject
 	protected AddVlanService addVlanService;
 	
-	private Vlan vlan;
+	private VlanEditor vlanEditor;
 	
 	@PostConstruct
 	public void init() {
-	  vlan = addVlanService.newVlan();
+	  vlanEditor = addVlanService.newVlan();
 	}
 	
-	public Vlan getVlan() {
-    return vlan;
+	public VlanEditor getVlanEditor() {
+    return vlanEditor;
   }
 
   public String save() {
     try {
-      addVlanService.saveVlan(vlan);
+      addVlanService.saveVlan(vlanEditor);
       return "success";
     }
     catch (AddVlanException ex) {
