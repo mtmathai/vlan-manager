@@ -30,6 +30,9 @@
         <f:facet name="header">Notes</f:facet>
         #{vlan.note}
       </h:column>
+      <h:column>
+        <a href="edit?id=#{vlan.id}">Edit</a>
+      </h:column>
     </h:dataTable>
     
     <h:panelGroup rendered="#{empty vlanTableBean.vlans}">
