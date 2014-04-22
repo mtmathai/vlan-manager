@@ -4,28 +4,29 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-import mtm.vlanmgr.Vlan;
-import mtm.vlanmgr.VlanFactory;
-import mtm.vlanmgr.repository.VlanRepository;
+import org.apache.commons.lang.Validate;
 
 @ApplicationScoped
 public class AddVlanServiceBean implements AddVlanService {
 
   @Inject
-  protected VlanFactory vlanFactory;
-  
-  @Inject
-  protected VlanRepository vlanRepository;
+  protected VlanEditorFactory editorFactory;
   
   @Override
-  public Vlan newVlan() {
-    return vlanFactory.newVlan();
+  public VlanEditor newVlan() {
+    return editorFactory.newEditor();
   }
 
   @Override
-  @Transactional
-  public void saveVlan(Vlan vlan) throws AddVlanException {
-    vlanRepository.add(vlan);
+  @Transactional(Transactional.TxType.REQUIRED)
+  public void saveVlan(VlanEditor editor) throws AddVlanException {
+    Validate.isTrue(editor instanceof SaveableVlanEditor);
+    try {
+      ((SaveableVlanEditor) editor).save();
+    }
+    catch (EditorException ex) {
+      throw new AddVlanException();
+    }
   }
 
 }
