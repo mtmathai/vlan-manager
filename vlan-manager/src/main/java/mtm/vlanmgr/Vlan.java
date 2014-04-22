@@ -2,6 +2,8 @@ package mtm.vlanmgr;
 
 public interface Vlan {
 
+  Long getId();
+  
   Integer getVlanId();
   
   void setVlanId(Integer vlanId);

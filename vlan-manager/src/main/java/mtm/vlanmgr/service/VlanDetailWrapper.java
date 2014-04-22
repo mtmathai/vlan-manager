@@ -14,6 +14,11 @@ public class VlanDetailWrapper implements VlanDetail {
   }
 
   @Override
+  public Long getId() {
+    return vlan.getId();
+  }
+
+  @Override
   public Integer getVlanId() {
     return vlan.getVlanId();
   }

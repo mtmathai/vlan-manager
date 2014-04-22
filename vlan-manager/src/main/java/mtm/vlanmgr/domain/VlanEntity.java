@@ -30,6 +30,11 @@ public class VlanEntity implements Vlan {
   private String note;
 
   @Override
+  public Long getId() {
+    return id;
+  }
+
+  @Override
   public Integer getVlanId() {
     return vlanId;
   }
