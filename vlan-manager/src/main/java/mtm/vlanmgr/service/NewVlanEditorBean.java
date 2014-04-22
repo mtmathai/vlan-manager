@@ -4,6 +4,7 @@ import javax.enterprise.context.Dependent;
 import javax.transaction.Transactional;
 
 @Dependent
+@NewEntity
 public class NewVlanEditorBean extends AbstractVlanEditorBean {
 
   @Override

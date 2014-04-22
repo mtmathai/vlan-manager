@@ -5,15 +5,22 @@ import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 import mtm.vlanmgr.VlanFactory;
+import mtm.vlanmgr.repository.VlanRepository;
 
 @ApplicationScoped
 public class VlanEditorFactoryBean implements VlanEditorFactory {
 
-  @Inject
+  @Inject @NewEntity
   protected Instance<DelegatingVlanEditor> newEditors;
+  
+  @Inject @ExistingEntity
+  protected Instance<DelegatingVlanEditor> existingEditors;
   
   @Inject
   protected VlanFactory vlanFactory;
+  
+  @Inject 
+  protected VlanRepository vlanRepository;
   
   @Override
   public SaveableVlanEditor newEditor() {
@@ -24,7 +31,9 @@ public class VlanEditorFactoryBean implements VlanEditorFactory {
 
   @Override
   public SaveableVlanEditor newEditor(Long id) {
-    throw new UnsupportedOperationException();
+    DelegatingVlanEditor editor = existingEditors.get();
+    editor.setDelegate(vlanRepository.findById(id));
+    return editor;
   }
 
 }
