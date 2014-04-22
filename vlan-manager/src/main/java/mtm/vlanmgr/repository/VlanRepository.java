@@ -7,6 +7,8 @@ import mtm.vlanmgr.Vlan;
 public interface VlanRepository {
 
   void add(Vlan vlan) throws RepositoryException;
+
+  Vlan update(Vlan vlan) throws RepositoryException;
   
   Vlan findById(Long id);
   

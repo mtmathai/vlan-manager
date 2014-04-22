@@ -30,6 +30,19 @@ public class JpaVlanRepository implements VlanRepository {
     }
   }
 
+  @Override
+  public Vlan update(Vlan vlan) throws RepositoryException {
+    return entityManager.merge(vlan);
+  }
+
+  @Override
+  public Vlan findById(Long id) {
+    TypedQuery<Vlan> query = entityManager.createNamedQuery(
+        "findVlanById", Vlan.class);
+    query.setParameter("id", id);
+    return query.getSingleResult();
+  }
+
   /**
    * {@inheritDoc}
    */
