@@ -2,6 +2,10 @@ package mtm.vlanmgr.service;
 
 public interface AddVlanService {
 
+  /**
+   * Creates an editor for a new VLAN.
+   * @return VLAN editor
+   */
   VlanEditor createEditor();
 
   /**
