@@ -9,11 +9,12 @@ public class AddVlanServiceBean implements AddVlanService {
   
   @Override
   public VlanEditor createEditor() {
-    return null;
+    return editorFactory.newEditor();
   }
 
   @Override
   public void saveVlan(VlanEditor editor, Errors errors) throws VlanException {
+    ((SaveableVlanEditor) editor).save(errors);
   }
 
 }
