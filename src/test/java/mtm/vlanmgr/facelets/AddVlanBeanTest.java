@@ -7,6 +7,9 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.jmock.Expectations.returnValue;
 import static org.jmock.Expectations.throwException;
+
+import javax.enterprise.context.Conversation;
+
 import mtm.vlanmgr.service.AddVlanService;
 import mtm.vlanmgr.service.Errors;
 import mtm.vlanmgr.service.VlanEditor;
@@ -32,6 +35,9 @@ public class AddVlanBeanTest {
   private Errors errors;
   
   @Mock
+  private Conversation conversation;
+  
+  @Mock
   private VlanEditor editor;
 
   private AddVlanBean bean = new AddVlanBean();
@@ -39,6 +45,7 @@ public class AddVlanBeanTest {
   @Before
   public void setUp() throws Exception {
     bean.addVlanService = addVlanService;
+    bean.conversation = conversation;
     bean.errors = errors;
   }
   
@@ -47,6 +54,7 @@ public class AddVlanBeanTest {
     context.checking(new Expectations() { {
       oneOf(addVlanService).createEditor();
       will(returnValue(editor));
+      oneOf(conversation).begin();
     } });
     
     bean.init();
@@ -56,7 +64,9 @@ public class AddVlanBeanTest {
   @Test
   public void testSave() throws Exception {
     context.checking(saveVlanExpectations(returnValue(null)));
-    
+    context.checking(new Expectations() { {
+      oneOf(conversation).end();
+    } });
     bean.setVlan(editor);
     assertThat(bean.save(), is(equalTo(AddVlanBean.SUCCESS_OUTCOME)));
   }
@@ -69,6 +79,15 @@ public class AddVlanBeanTest {
     assertThat(bean.save(), is(nullValue()));
   }
 
+  @Test
+  public void testCancel() throws Exception {
+    context.checking(new Expectations() { { 
+      oneOf(conversation).end();
+    } });
+    
+    assertThat(bean.cancel(), is(equalTo(AddVlanBean.CANCEL_OUTCOME)));
+  }
+  
   private Expectations saveVlanExpectations(final Action outcome) 
       throws VlanException {
     return new Expectations() { { 
